@@ -11,7 +11,9 @@ export class PrintInvoiceComponent implements OnInit {
 formvalues:any;
 _treatmentType:string;
 today = new Date();
+_amount:any;
 _TotalAmount:number=0;
+_discountedAmount:number=0;
 _invoiceDetails:any;
   constructor(private dataService:BillingService) { }
 
@@ -35,18 +37,11 @@ _invoiceDetails:any;
     console.log('check final service list');
     console.log(this._invoiceDetails);
     
-    this._TotalAmount=this.dataService.GetTotalBillAmount();
+    // this._TotalAmount=this.dataService.GetTotalBillAmount();
+    this._amount=this.dataService.GetTotalBillAmount();
+    this._TotalAmount = this._amount[0];
+    this._discountedAmount = this._amount[1];
   
     //console.log('OnPrintInvoiceComponent_ExecutedService_GetTotalBillAmount');
   }
-
-  // calcTotalAmt(formValues:NgForm){
-  //   let totalAmtList:[]=this._invoiceDetails.map(x=>x.cost);
-  //   totalAmtList.forEach(element => {
-  //     this._TotalAmount=this._TotalAmount+element;
-  //   });
-  //   this._TotalAmount=this._TotalAmount-this.formvalues.discount;
-  //   console.log('OnPrintInvoiceComponent_ExecutingcalcTotalAmt');
-  //   console.log(this._TotalAmount);
-  // }
 }
